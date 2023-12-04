@@ -1,6 +1,7 @@
 //Type imports
 import { Request, Response, Express } from "express";
 import { Sequelize } from "sequelize";
+import { userRouter } from "./routes/users";
 
 //imports
 const express = require("express");
@@ -15,6 +16,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 
 //routes
+app.use("/api/users", userRouter);
 
 //generic GET request
 app.get("/", (req: Request, res: Response) => {
