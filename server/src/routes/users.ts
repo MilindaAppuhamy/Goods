@@ -8,6 +8,7 @@ import {
   UserLoginType,
 } from "../models/user";
 import { passwordCheck } from "../utils/passwordCheck";
+import { Item } from "../models/item";
 
 const express = require("express");
 const bcrypt = require("bcrypt");
@@ -16,7 +17,7 @@ router.use(express.json());
 
 //get all users endpoint
 router.get("/", async (req: Request, res: Response) => {
-  const users = await User.findAll();
+  const users = await User.findAll({ include: [Item] });
   res.send(users);
 });
 

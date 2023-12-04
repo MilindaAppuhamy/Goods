@@ -1,5 +1,12 @@
 import Joi from "joi";
-import { DataTypes, Model, ModelStatic, Sequelize } from "sequelize";
+import {
+  DataTypes,
+  HasManyAddAssociationMixin,
+  Model,
+  ModelStatic,
+  Sequelize,
+} from "sequelize";
+import { ItemType } from "./item";
 
 const db: Sequelize = require("../db");
 
@@ -11,7 +18,11 @@ export type UserType = {
 };
 
 //Model
-export const User: ModelStatic<Model<UserType>> = db.define("user", {
+export const User: ModelStatic<
+  Model<UserType> & {
+    addItem: HasManyAddAssociationMixin<Model<ItemType>, ItemType>;
+  }
+> = db.define("user", {
   username: {
     type: DataTypes.STRING,
     allowNull: false,

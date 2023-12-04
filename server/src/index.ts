@@ -2,6 +2,7 @@
 import { Request, Response, Express } from "express";
 import { Sequelize } from "sequelize";
 import { userRouter } from "./routes/users";
+import { itemRouter } from "./routes/items";
 
 //imports
 const express = require("express");
@@ -17,6 +18,7 @@ app.use(cors());
 
 //routes
 app.use("/api/users", userRouter);
+app.use("/api/items", itemRouter);
 
 //generic GET request
 app.get("/", (req: Request, res: Response) => {
