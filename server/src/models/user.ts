@@ -7,6 +7,7 @@ import {
   Sequelize,
 } from "sequelize";
 import { ItemType } from "./item";
+import { CartItemType } from "./cartItem";
 
 const db: Sequelize = require("../db");
 
@@ -21,6 +22,7 @@ export type UserType = {
 export const User: ModelStatic<
   Model<UserType> & {
     addItem: HasManyAddAssociationMixin<Model<ItemType>, ItemType>;
+    addCartItem: HasManyAddAssociationMixin<Model<CartItemType>, CartItemType>;
   }
 > = db.define("user", {
   username: {
