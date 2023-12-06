@@ -26,6 +26,7 @@ const RegisterForm = ({
     isError,
     isSuccess,
     error,
+    data: user,
   } = useUserRegister();
 
   const navigate = useNavigate();
@@ -39,15 +40,25 @@ const RegisterForm = ({
     }
   }
 
+  function handleSuccess() {
+    //toast
+    showToast("Success", "Successfully registered.", "success");
+    //setting the user-token
+    const user_token = {
+      token: user?.headers["x-auth-token"],
+      expiration: Date.now() + 5 * 60 * 60 * 1000, //expires after 5 hours
+    };
+    localStorage.setItem("user-token", JSON.stringify(user_token));
+    //navigation
+    setTimeout(() => {
+      navigate("/goods");
+    }, 2000);
+  }
+
   //showing toasts
   useEffect(() => {
     if (isError) showToast("Error", error.response?.data as string, "error");
-    if (isSuccess) {
-      showToast("Success", "Successfully registered.", "success");
-      setTimeout(() => {
-        navigate("/goods");
-      }, 2000);
-    }
+    if (isSuccess) handleSuccess();
   }, [isError, isSuccess]);
 
   return (

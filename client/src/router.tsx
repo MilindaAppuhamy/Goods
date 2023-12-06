@@ -1,6 +1,7 @@
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import AuthenticationPage from "./pages/AuthenticationPage";
 import MainPage from "./pages/MainPage";
+import UserPrivateRoutes from "./routing/UserPrivateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -9,7 +10,11 @@ const router = createBrowserRouter([
     errorElement: <h1>Error</h1>,
     children: [
       { index: true, element: <AuthenticationPage /> },
-      { path: "/goods", element: <MainPage /> },
+      {
+        path: "/goods",
+        element: <UserPrivateRoutes />,
+        children: [{ index: true, element: <MainPage /> }],
+      },
     ],
   },
 ]);
