@@ -1,6 +1,10 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, Button, Heading } from "@chakra-ui/react";
 import InputField from "./InputField";
+import useUserLogin from "../hooks/useUserLogin";
+import showToast from "../utils/showToast";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export type LoginInputType = {
   email: string;
@@ -14,7 +18,31 @@ const LoginForm = ({
   input: LoginInputType;
   setInput: React.Dispatch<React.SetStateAction<any>>;
 }) => {
-  function handleSubmit(): void {}
+  //useUserLogin Hook
+  const {
+    mutate: handleLogin,
+    isLoading,
+    isError,
+    isSuccess,
+    error,
+  } = useUserLogin();
+
+  const navigate = useNavigate();
+
+  function handleSubmit(): void {
+    handleLogin(input);
+  }
+
+  //showing toasts
+  useEffect(() => {
+    if (isError) showToast("Error", error.response?.data as string, "error");
+    if (isSuccess) {
+      showToast("Success", "Successfully logged in.", "success");
+      setTimeout(() => {
+        navigate("/goods");
+      }, 2000);
+    }
+  }, [isError, isSuccess]);
 
   return (
     <Box
@@ -47,7 +75,7 @@ const LoginForm = ({
         width={"90%"}
         mt={5}
         maxW={"300px"}
-        isLoading={false}
+        isLoading={isLoading}
         loadingText="verifying"
         color="#5D3FD3"
         borderColor={"#5D3FD3"}

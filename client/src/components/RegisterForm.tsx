@@ -1,6 +1,10 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, Button, Heading } from "@chakra-ui/react";
 import InputField from "./InputField";
+import useUserRegister from "../hooks/useUserRegister";
+import showToast from "../utils/showToast";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export type RegisterInputType = {
   username: string;
@@ -15,7 +19,36 @@ const RegisterForm = ({
   input: RegisterInputType;
   setInput: React.Dispatch<React.SetStateAction<any>>;
 }) => {
-  function handleSubmit(): void {}
+  //useUserLogin Hook
+  const {
+    mutate: handleRegister,
+    isLoading,
+    isError,
+    isSuccess,
+    error,
+  } = useUserRegister();
+
+  const navigate = useNavigate();
+
+  function handleSubmit(): void {
+    handleRegister(input);
+    if (isSuccess) {
+      setTimeout(() => {
+        navigate("/goods");
+      }, 2000);
+    }
+  }
+
+  //showing toasts
+  useEffect(() => {
+    if (isError) showToast("Error", error.response?.data as string, "error");
+    if (isSuccess) {
+      showToast("Success", "Successfully registered.", "success");
+      setTimeout(() => {
+        navigate("/goods");
+      }, 2000);
+    }
+  }, [isError, isSuccess]);
 
   return (
     <Box
@@ -52,7 +85,7 @@ const RegisterForm = ({
         width={"90%"}
         mt={5}
         maxW={"300px"}
-        isLoading={false}
+        isLoading={isLoading}
         loadingText="verifying"
         color="#5D3FD3"
         borderColor={"#5D3FD3"}
