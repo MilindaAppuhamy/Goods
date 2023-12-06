@@ -9,6 +9,7 @@ import { cartRouter } from "./routes/carts";
 const express = require("express");
 const cors = require("cors");
 const db: Sequelize = require("./db");
+require("dotenv").config();
 
 //initial variables
 const app: Express = express();

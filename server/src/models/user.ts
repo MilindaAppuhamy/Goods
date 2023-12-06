@@ -8,6 +8,8 @@ import {
 } from "sequelize";
 import { ItemType } from "./item";
 import { CartItemType } from "./cartItem";
+var jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const db: Sequelize = require("../db");
 
@@ -23,6 +25,7 @@ export const User: ModelStatic<
   Model<UserType> & {
     addItem: HasManyAddAssociationMixin<Model<ItemType>, ItemType>;
     addCartItem: HasManyAddAssociationMixin<Model<CartItemType>, CartItemType>;
+    generateAuthToken: () => string;
   }
 > = db.define("user", {
   username: {
@@ -39,6 +42,13 @@ export const User: ModelStatic<
     allowNull: false,
   },
 });
+
+User.prototype.generateAuthToken = function () {
+  return jwt.sign(
+    { id: this.id, email: this.email },
+    process.env.JWT_SECRET_KEY
+  );
+};
 
 //register Validation
 export function validateUser(user: UserType): Joi.ValidationResult {

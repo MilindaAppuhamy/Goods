@@ -53,6 +53,10 @@ router.post(
         email: req.body.email,
         password: req.body.password,
       });
+
+      //setting the auth token
+      const token = user.generateAuthToken();
+      res.setHeader("x-auth-token", token);
       return res.status(200).send(user);
     } catch (error) {
       if (error instanceof Error) return res.status(500).send(error.message);
@@ -70,16 +74,23 @@ router.post(
     if (error) return res.status(404).send(error.message);
 
     //find user by email
-    const user = (await User.findOne({
+    const user = await User.findOne({
       where: {
         email: req.body.email,
       },
-    })) as UserType | null;
+    });
     if (!user) return res.status(400).send("User does not exist.");
 
     //password matching
-    const result = await bcrypt.compare(req.body.password, user.password);
+    const result = await bcrypt.compare(
+      req.body.password,
+      user.getDataValue("password")
+    );
     if (!result) return res.status(404).send("Incorrect email or password.");
+
+    //setting the auth token
+    const token = user.generateAuthToken();
+    res.setHeader("x-auth-token", token);
 
     //user gains access
     return res.status(200).send(user);
