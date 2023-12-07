@@ -6,7 +6,7 @@ class APIClient<T> {
 
   constructor(endpoint: string) {
     this.endpoint = endpoint;
-    this.baseUrl = "http://localhost:3000"; //"https://goods-backend.onrender.com";
+    this.baseUrl = "https://goods-backend.onrender.com";
   }
 
   get = async (id: number | string, headers?: object) => {

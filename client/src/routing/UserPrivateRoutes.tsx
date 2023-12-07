@@ -1,4 +1,5 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import MainLayoutPage from "../pages/MainLayoutPage";
 
 const UserPrivateRoutes = () => {
   const userToken = localStorage.getItem("user-token");
@@ -12,7 +13,7 @@ const UserPrivateRoutes = () => {
       localStorage.removeItem("user-token");
     }
   }
-  return <Outlet />;
+  return <MainLayoutPage />;
 };
 
 export default UserPrivateRoutes;

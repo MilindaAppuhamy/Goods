@@ -46,7 +46,7 @@ const LoginForm = ({
     localStorage.setItem("userId", JSON.stringify(user?.data));
     //navigation
     setTimeout(() => {
-      navigate("/goods");
+      navigate("/goods/explore");
     }, 2000);
   }
 

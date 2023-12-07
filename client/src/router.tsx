@@ -1,7 +1,11 @@
 import { Outlet, createBrowserRouter } from "react-router-dom";
 import AuthenticationPage from "./pages/AuthenticationPage";
-import MainLayoutPage from "./pages/MainLayoutPage";
+import ExplorePage from "./pages/ExplorePage";
 import UserPrivateRoutes from "./routing/UserPrivateRoutes";
+import WishlistPage from "./pages/WishlistPage";
+import BasketPage from "./pages/BasketPage";
+import MyStorePage from "./pages/MyStorePage";
+import SettingsPage from "./pages/SettingsPage";
 
 const router = createBrowserRouter([
   {
@@ -11,9 +15,30 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <AuthenticationPage /> },
       {
-        path: "/goods",
+        path: "goods",
         element: <UserPrivateRoutes />,
-        children: [{ index: true, element: <MainLayoutPage /> }],
+        children: [
+          {
+            path: "explore",
+            element: <ExplorePage />,
+          },
+          {
+            path: "wishlist",
+            element: <WishlistPage />,
+          },
+          {
+            path: "basket",
+            element: <BasketPage />,
+          },
+          {
+            path: "my store",
+            element: <MyStorePage />,
+          },
+          {
+            path: "settings",
+            element: <SettingsPage />,
+          },
+        ],
       },
     ],
   },
