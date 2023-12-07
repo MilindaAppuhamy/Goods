@@ -21,6 +21,21 @@ router.get("/", async (req: Request, res: Response) => {
   res.send(users);
 });
 
+//get user by access token
+router.get(
+  "/:accessToken",
+  async (req: Request<{ accessToken: string }>, res: Response) => {
+    const user = await User.findOne({
+      where: {
+        access_token: req.params.accessToken,
+      },
+    });
+    if (!user) return res.status(400).send("User invalid.");
+
+    return res.status(200).send(user);
+  }
+);
+
 //user register endpoint
 router.post(
   "/register",
