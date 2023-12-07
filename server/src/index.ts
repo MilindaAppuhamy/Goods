@@ -16,7 +16,11 @@ const app: Express = express();
 const PORT = process.env.PORT || 3000;
 
 //middleware
-app.use(cors());
+app.use(
+  cors({
+    exposedHeaders: ["x-auth-token"],
+  })
+);
 
 //routes
 app.use("/api/users", userRouter);
