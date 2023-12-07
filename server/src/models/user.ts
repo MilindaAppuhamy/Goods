@@ -15,10 +15,10 @@ const db: Sequelize = require("../db");
 
 //User type
 export type UserType = {
+  id?: number | string;
   username: string;
   email: string;
   password: string;
-  access_token?: string;
 };
 
 //Model
@@ -28,41 +28,27 @@ export const User: ModelStatic<
     addCartItem: HasManyAddAssociationMixin<Model<CartItemType>, CartItemType>;
     generateAuthToken: () => string;
   }
-> = db.define(
-  "user",
-  {
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    access_token: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue: "",
-    },
+> = db.define("user", {
+  username: {
+    type: DataTypes.STRING,
+    allowNull: false,
   },
-  {
-    defaultScope: {
-      attributes: { exclude: ["access_token"] },
-    },
-  }
-);
+  email: {
+    type: DataTypes.STRING,
+    unique: true,
+    allowNull: false,
+  },
+  password: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+});
 
 User.prototype.generateAuthToken = function () {
   const access_token = jwt.sign(
     { id: this.id, email: this.email },
     process.env.JWT_SECRET_KEY
   );
-  this.setDataValue("access_token", access_token);
   return access_token;
 };
 

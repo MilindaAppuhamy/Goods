@@ -6,8 +6,18 @@ class APIClient<T> {
 
   constructor(endpoint: string) {
     this.endpoint = endpoint;
-    this.baseUrl = "https://goods-backend.onrender.com";
+    this.baseUrl = "http://localhost:3000"; //"https://goods-backend.onrender.com";
   }
+
+  get = async (id: number | string, headers?: object) => {
+    const axiosInstance = axios.create({
+      headers: headers,
+    });
+    const response = await axiosInstance.get(
+      this.baseUrl + this.endpoint + "/" + id
+    );
+    return response;
+  };
 
   post = async (data: T) => {
     const response = await axios.post(this.baseUrl + this.endpoint, data);

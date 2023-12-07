@@ -15,21 +15,21 @@ const bcrypt = require("bcrypt");
 const router: Express = express.Router();
 router.use(express.json());
 
+//middleware
+const auth = require("../middleware/auth");
+
 //get all users endpoint
 router.get("/", async (req: Request, res: Response) => {
   const users = await User.findAll({ include: [Item] });
   res.send(users);
 });
 
-//get user by access token
+//get user by id
 router.get(
-  "/:accessToken",
-  async (req: Request<{ accessToken: string }>, res: Response) => {
-    const user = await User.findOne({
-      where: {
-        access_token: req.params.accessToken,
-      },
-    });
+  "/:id",
+  auth,
+  async (req: Request<{ id: number | string }>, res: Response) => {
+    const user = await User.findByPk(req.params.id);
     if (!user) return res.status(400).send("User invalid.");
 
     return res.status(200).send(user);
@@ -72,7 +72,8 @@ router.post(
       //setting the auth token
       const token = user.generateAuthToken();
       res.setHeader("x-auth-token", token);
-      return res.status(200).send(user);
+      const userId = user.getDataValue("id")?.toString();
+      return res.status(200).send(userId);
     } catch (error) {
       if (error instanceof Error) return res.status(500).send(error.message);
       else return res.status(500).send("An unkown server error occured.");
@@ -108,7 +109,8 @@ router.post(
     res.setHeader("x-auth-token", token);
 
     //user gains access
-    return res.status(200).send(user);
+    const userId = user.getDataValue("id")?.toString();
+    return res.status(200).send(userId);
   }
 );
 

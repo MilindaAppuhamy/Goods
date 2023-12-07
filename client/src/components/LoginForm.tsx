@@ -43,6 +43,7 @@ const LoginForm = ({
       expiration: Date.now() + 5 * 60 * 60 * 1000, //expires after 5 hours
     };
     localStorage.setItem("user-token", JSON.stringify(user_token));
+    localStorage.setItem("userId", JSON.stringify(user?.data));
     //navigation
     setTimeout(() => {
       navigate("/goods");
