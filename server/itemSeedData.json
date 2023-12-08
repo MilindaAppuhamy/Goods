@@ -1,0 +1,170 @@
+[
+  {
+    "name": "Men's Cotton T-Shirt",
+    "category": "clothing",
+    "image": "https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F28%2Ffa%2F28fac68478ada0be32989fab0c776d14d7c8d1be.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5Bmen_tshirtstanks_shortsleeve%5D%2Ctype%5BDESCRIPTIVESTILLLIFE%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]",
+    "price": 1999,
+    "description": "Comfortable and stylish cotton T-shirt for men.",
+    "quantity": 80
+  },
+  {
+    "name": "Wireless Bluetooth Earbuds",
+    "category": "technology",
+    "image": "https://www.beatsbydre.com/content/dam/beats/web/product/earbuds/beats-fit-pro/pdp/product-carousel/tidal-blue/pc-fit-pro-tidal-blue-case-closed-floating.jpg.large.2x.jpg",
+    "price": 4999,
+    "description": "High-quality wireless earbuds with Bluetooth connectivity.",
+    "quantity": 65
+  },
+  {
+    "name": "Organic Chocolate Bar",
+    "category": "food",
+    "image": "https://m.media-amazon.com/images/I/61yGL7TMQxL._AC_UF1000,1000_QL80_.jpg",
+    "price": 299,
+    "description": "Delicious organic chocolate bar for sweet cravings.",
+    "quantity": 90
+  },
+  {
+    "name": "Women's Denim Jeans",
+    "category": "clothing",
+    "image": "https://www.danielli.co.uk/cdn/shop/products/88503d753d609f579f63c1f053120913.jpeg?v=1549543106",
+    "price": 3499,
+    "description": "Trendy denim jeans for women with a comfortable fit.",
+    "quantity": 75
+  },
+  {
+    "name": "Smart Fitness Tracker",
+    "category": "technology",
+    "image": "https://cfimg.wowcher.co.uk/cdn-cgi/image/height=520,width=777,quality=85,format=auto/https://static.wowcher.co.uk/images/deal/19841566/749066.jpg",
+    "price": 7999,
+    "description": "Track your fitness goals with this advanced smart fitness tracker.",
+    "quantity": 60
+  },
+  {
+    "name": "Organic Quinoa Grain",
+    "category": "food",
+    "image": "https://sevenhillswholefoods.com/cdn/shop/files/7hquin_FOP_and_Contents.jpg?v=1696325694",
+    "price": 899,
+    "description": "Nutrient-rich organic quinoa grain for a healthy diet.",
+    "quantity": 85
+  },
+  {
+    "name": "Women's Sneakers",
+    "category": "clothing",
+    "image": "https://m.media-amazon.com/images/I/81hGMemIsgL._AC_UY580_.jpg",
+    "price": 2499,
+    "description": "Stylish and comfortable sneakers for women.",
+    "quantity": 70
+  },
+  {
+    "name": "4K Ultra HD Smart TV",
+    "category": "technology",
+    "image": "https://media.currys.biz/i/currysprod/10249286?$l-large$&fmt=auto",
+    "price": 59999,
+    "description": "Immerse yourself in stunning visuals with this 4K Ultra HD Smart TV.",
+    "quantity": 55
+  },
+  {
+    "name": "Artisanal Olive Oil",
+    "category": "food",
+    "image": "https://theartisanfoodcompany.com/wp-content/uploads/2021/10/congedi-evoo-1l.jpg",
+    "price": 1299,
+    "description": "Premium artisanal olive oil for cooking and dressing.",
+    "quantity": 78
+  },
+  {
+    "name": "Men's Leather Wallet",
+    "category": "clothing",
+    "image": "https://joojoobs.com/wp-content/uploads/2018/12/personalized-leather-card-holder-399x266.jpg",
+    "price": 1499,
+    "description": "Classy leather wallet for men with multiple compartments.",
+    "quantity": 63
+  },
+  {
+    "name": "Noise-Canceling Headphones",
+    "category": "technology",
+    "image": "https://www.sony.co.uk/image/dd18cf93606d238305a733d336c45537?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF",
+    "price": 8999,
+    "description": "Experience superior sound quality with these noise-canceling headphones.",
+    "quantity": 88
+  },
+  {
+    "name": "Organic Green Tea",
+    "category": "food",
+    "image": "https://m.media-amazon.com/images/I/615NWi1W+9L.jpg",
+    "price": 499,
+    "description": "Refresh your senses with this organic green tea.",
+    "quantity": 72
+  },
+  {
+    "name": "Women's Summer Dress",
+    "category": "clothing",
+    "image": "https://img1.shopcider.com/product/1650360047000-4Ae256.jpg?x-oss-process=image/resize,w_1050,m_lfit/quality,Q_80/interlace,1",
+    "price": 2799,
+    "description": "Stay cool and stylish in this comfortable summer dress for women.",
+    "quantity": 58
+  },
+  {
+    "name": "Ultra-Slim Laptop",
+    "category": "technology",
+    "image": "https://m.media-amazon.com/images/I/51mmnvSEoWL.jpg",
+    "price": 56999,
+    "description": "Powerful and portable ultra-slim laptop for work and entertainment.",
+    "quantity": 80
+  },
+  {
+    "name": "Gourmet Coffee Beans",
+    "category": "food",
+    "image": "https://www.bettys.co.uk/media/catalog/product/cache/4f47179cc05467ee6cea5a914e5dd4f1/w/o/worlds-best-coffee-beans-2004038_1.jpg",
+    "price": 799,
+    "description": "Indulge in the rich flavor of gourmet coffee beans.",
+    "quantity": 95
+  },
+  {
+    "name": "Men's Casual Shirt",
+    "category": "clothing",
+    "image": "https://norifashion.co.uk/wp-content/uploads/2022/09/57-42.jpg",
+    "price": 1899,
+    "description": "Look sharp in this stylish men's casual shirt.",
+    "quantity": 69
+  },
+  {
+    "name": "High-Performance Gaming Mouse",
+    "category": "technology",
+    "image": "https://m.media-amazon.com/images/I/61mpMH5TzkL.jpg",
+    "price": 2499,
+    "description": "Elevate your gaming experience with this high-performance gaming mouse.",
+    "quantity": 82
+  },
+  {
+    "name": "Artisanal Honey Jar",
+    "category": "food",
+    "image": "https://m.media-amazon.com/images/I/71xZsuyky8L.jpg",
+    "price": 649,
+    "description": "Pure and natural artisanal honey for sweetness and health benefits.",
+    "quantity": 77
+  },
+  {
+    "name": "Women's Winter Jacket",
+    "category": "clothing",
+    "image": "https://cdn.manomano.com/images/images_products/24340407/P/74078645_1.jpg",
+    "price": 4599,
+    "description": "Stay warm and stylish in this women's winter jacket.",
+    "quantity": 63
+  },
+  {
+    "name": "Smart Home Security Camera",
+    "category": "technology",
+    "image": "https://m.media-amazon.com/images/I/51Z8ywyWp4L._AC_UF894,1000_QL80_.jpg",
+    "price": 3499,
+    "description": "Ensure the security of your home with this smart home security camera.",
+    "quantity": 75
+  },
+  {
+    "name": "Organic Quinoa Pasta",
+    "category": "food",
+    "image": "https://www.clearspring.co.uk/cdn/shop/products/CS842-Organic-Gluten-Free-Brown-Rice-Pasta-with-Quinoa-Amaranth-355118_1000x.jpg?v=1663082245",
+    "price": 599,
+    "description": "Enjoy a healthy and delicious meal with organic quinoa pasta.",
+    "quantity": 88
+  }
+]
