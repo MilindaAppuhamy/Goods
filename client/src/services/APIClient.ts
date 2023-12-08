@@ -9,6 +9,11 @@ class APIClient<T> {
     this.baseUrl = "https://goods-backend.onrender.com";
   }
 
+  getAll = async () => {
+    const response = await axios.get(this.baseUrl + this.endpoint);
+    return response;
+  };
+
   get = async (id: number | string, headers?: object) => {
     const axiosInstance = axios.create({
       headers: headers,
