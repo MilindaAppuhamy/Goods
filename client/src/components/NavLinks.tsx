@@ -55,8 +55,11 @@ const NavLinks = () => {
 
   function handleClick(e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) {
     const newPath = e.currentTarget.innerText.toLowerCase();
-
-    if (newPath === "explore" || "wishlist") setIsOpen(true);
+    if (newPath === "explore" || newPath === "wishlist") {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+    }
     navigate("/goods/" + newPath);
   }
 
