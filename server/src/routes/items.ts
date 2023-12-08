@@ -60,6 +60,7 @@ router.post(
         image: req.body.image,
         price: req.body.price,
         description: req.body.description,
+        quantity: req.body.quantity,
       });
 
       await user.addItem(item);
@@ -103,6 +104,7 @@ router.patch(
         image: req.body.image,
         price: req.body.price,
         description: req.body.description,
+        quantity: req.body.quantity,
       });
       return res.status(200).send(updatedItem);
     } catch (error) {

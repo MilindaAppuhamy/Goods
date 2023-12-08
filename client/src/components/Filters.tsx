@@ -23,11 +23,12 @@ import { FiltersType } from "../pages/ExplorePage";
 const Filters = ({
   filters,
   setFilters,
+  maxPrice,
 }: {
   filters: FiltersType;
   setFilters: React.Dispatch<React.SetStateAction<FiltersType>>;
+  maxPrice: number;
 }) => {
-  const maxPrice = 99999;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [inputs, setInputs] = useState({
     category: "",

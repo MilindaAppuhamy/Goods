@@ -8,10 +8,12 @@ const SearchFilters = ({
   filters,
   setFilters,
   setSearchText,
+  maxPrice,
 }: {
   filters: FiltersType;
   setFilters: React.Dispatch<React.SetStateAction<FiltersType>>;
   setSearchText: React.Dispatch<React.SetStateAction<string>>;
+  maxPrice: number;
 }) => {
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -45,7 +47,7 @@ const SearchFilters = ({
           />
         </InputGroup>
       </form>
-      <Filters filters={filters} setFilters={setFilters} />
+      <Filters filters={filters} setFilters={setFilters} maxPrice={maxPrice} />
     </HStack>
   );
 };

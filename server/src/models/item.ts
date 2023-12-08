@@ -10,6 +10,7 @@ export type ItemType = {
   image: string;
   price: number;
   description: string;
+  quantity: number;
   userId?: number | string;
 };
 
@@ -38,6 +39,11 @@ export const Item: ModelStatic<Model<ItemType>> = db.define("item", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  quantity: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 1,
+  },
 });
 
 //item Validation
@@ -50,6 +56,7 @@ export function validateItem(item: ItemType): Joi.ValidationResult {
     image: Joi.string().min(5).required(),
     price: Joi.number().min(0).required(),
     description: Joi.string().min(20).required(),
+    quantity: Joi.number().min(1).max(100).required(),
   });
 
   return schema.validate({
@@ -58,5 +65,6 @@ export function validateItem(item: ItemType): Joi.ValidationResult {
     image: item.image,
     price: item.price,
     description: item.description,
+    quantity: item.quantity,
   });
 }

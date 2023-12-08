@@ -9,11 +9,12 @@ export type FiltersType = {
 };
 
 const ExplorePage = () => {
+  const maxPrice = 99999;
   const [searchText, setSearchText] = useState<string>("");
   const [filters, setFilters] = useState<FiltersType>({
     category: "",
     minPrice: 0,
-    maxPrice: 1000,
+    maxPrice: maxPrice,
   });
 
   console.log(filters, searchText);
@@ -24,6 +25,7 @@ const ExplorePage = () => {
         setSearchText={setSearchText}
         filters={filters}
         setFilters={setFilters}
+        maxPrice={maxPrice}
       />
     </Box>
   );
