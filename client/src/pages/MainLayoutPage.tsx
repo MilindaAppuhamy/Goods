@@ -19,7 +19,7 @@ const MainLayoutPage = () => {
           </GridItem>
         </Show>
 
-        <GridItem area={"main"} pl={20}>
+        <GridItem area={"main"} pl={1}>
           <Outlet />
         </GridItem>
       </Grid>

@@ -1,4 +1,4 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Skeleton, Text } from "@chakra-ui/react";
 import useGetUser from "../hooks/useGetUser";
 import getUserHeaders from "../utils/getUserHeaders";
 import { Navigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import { Navigate } from "react-router-dom";
 const UserAccountDetails = () => {
   const headers = getUserHeaders();
   const userId = JSON.parse(localStorage.getItem("userId")!);
-  const { data: user, error } = useGetUser(userId!, headers!);
+  const { data: user, error, isLoading } = useGetUser(userId!, headers!);
 
   return error ? (
     <Navigate to={"/"} />
@@ -25,12 +25,16 @@ const UserAccountDetails = () => {
         justifyContent={"center"}
         alignItems={"flex-start"}
       >
-        <Text fontFamily={"sans-serif"} fontSize={"14px"} color={"grey"}>
-          {user?.data.email}
-        </Text>
-        <Text fontFamily={"sans-serif"} fontSize={"18px"} color={"black"}>
-          {user?.data.username}
-        </Text>
+        <Skeleton isLoaded={!isLoading}>
+          <Text fontFamily={"sans-serif"} fontSize={"14px"} color={"grey"}>
+            {user?.data.email}
+          </Text>
+        </Skeleton>
+        <Skeleton isLoaded={!isLoading}>
+          <Text fontFamily={"sans-serif"} fontSize={"18px"} color={"black"}>
+            {user?.data.username}
+          </Text>
+        </Skeleton>
       </Box>
     </Box>
   );
