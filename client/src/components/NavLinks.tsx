@@ -1,18 +1,57 @@
 import { List, ListIcon, ListItem } from "@chakra-ui/react";
-import { CiLogout, CiShoppingBasket } from "react-icons/ci";
-import { CiShoppingTag } from "react-icons/ci";
-import { CiShop } from "react-icons/ci";
-import { CiSettings } from "react-icons/ci";
+import { stagger, useAnimate } from "framer-motion";
+import { MouseEvent, useEffect, useState } from "react";
+import {
+  CiHeart,
+  CiLogout,
+  CiSettings,
+  CiShop,
+  CiShoppingBasket,
+  CiShoppingTag,
+  CiStreamOn,
+} from "react-icons/ci";
 import { FaChevronDown } from "react-icons/fa";
-import { CiStreamOn } from "react-icons/ci";
-import { CiHeart } from "react-icons/ci";
-import { MouseEvent, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const NavLinks = () => {
   const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const navigate = useNavigate();
+  const scope = useMenuAnimation(isOpen);
+
+  function useMenuAnimation(isOpen: boolean) {
+    const [scope, animate] = useAnimate();
+    useEffect(() => {
+      animate(
+        ".sub_menu",
+        isOpen ? { display: "block" } : { display: "none" },
+        {
+          delay: isOpen ? 0.1 : 0.4,
+        }
+      );
+      animate(
+        ".sub_menu_item",
+        isOpen
+          ? {
+              opacity: 1,
+              scale: 1,
+              transform: "translateX(0px)",
+            }
+          : {
+              opacity: 0,
+              scale: 0.3,
+              transform: "translateX(-50px)",
+            },
+        {
+          duration: 0.3,
+          delay: isOpen
+            ? stagger(0.15, { startDelay: 0.15 })
+            : stagger(0.1, { startDelay: 0.05 }),
+        }
+      );
+    }, [isOpen]);
+    return scope;
+  }
 
   function handleClick(e: MouseEvent<HTMLLIElement, globalThis.MouseEvent>) {
     const newPath = e.currentTarget.innerText.toLowerCase();
@@ -29,13 +68,13 @@ const NavLinks = () => {
       flexDir={"column"}
       justifyContent={"center"}
       pl={6}
+      ref={scope}
     >
       <ListItem
         fontFamily={"sans-serif"}
         fontWeight={"normal"}
         fontSize={"large"}
         onClick={() => setIsOpen(!isOpen)}
-        mb={isOpen ? 0 : 5}
         cursor={"pointer"}
         p={2}
         pl={10}
@@ -47,6 +86,9 @@ const NavLinks = () => {
         _hover={{
           backgroundColor: "rgb(203, 195, 227, 0.4)",
         }}
+        mb={isOpen ? 0 : 5}
+        transition={"all 0.3s"}
+        transitionDelay={"0.3s"}
       >
         <ListIcon
           width={"32px"}
@@ -63,11 +105,13 @@ const NavLinks = () => {
           color={"#5D3FD3"}
           ml={"50px"}
           transform={isOpen ? "rotate(0deg)" : "rotate(90deg)"}
+          transition={"all 0.3s"}
         />
       </ListItem>
 
-      <List ml={"30px"} display={isOpen ? "block" : "none"}>
+      <List className="sub_menu" ml={"30px"}>
         <ListItem
+          className="sub_menu_item"
           fontFamily={"sans-serif"}
           fontWeight={"normal"}
           fontSize={"large"}
@@ -100,6 +144,7 @@ const NavLinks = () => {
         </ListItem>
 
         <ListItem
+          className="sub_menu_item"
           fontFamily={"sans-serif"}
           fontWeight={"normal"}
           fontSize={"large"}
