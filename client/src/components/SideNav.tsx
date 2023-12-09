@@ -9,9 +9,11 @@ const SideNav = () => {
       flexDir={"column"}
       alignItems={"center"}
       height={"100%"}
+      width={"280px"}
       borderRadius={20}
       backgroundColor={"white"}
       boxShadow={"2px 2px 10px #787878"}
+      position={"fixed"}
     >
       <Heading
         color={"#5D3FD3"}
