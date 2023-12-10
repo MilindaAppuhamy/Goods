@@ -9,6 +9,7 @@ import {
 } from "../models/user";
 import { passwordCheck } from "../utils/passwordCheck";
 import { Item } from "../models/item";
+import { CartItem } from "../models/cartItem";
 
 const express = require("express");
 const bcrypt = require("bcrypt");
@@ -29,7 +30,9 @@ router.get(
   "/:id",
   auth,
   async (req: Request<{ id: number | string }>, res: Response) => {
-    const user = await User.findByPk(req.params.id);
+    const user = await User.findByPk(req.params.id, {
+      include: [CartItem, Item],
+    });
     if (!user) return res.status(400).send("User invalid.");
 
     return res.status(200).send(user);
