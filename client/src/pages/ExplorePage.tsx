@@ -1,8 +1,14 @@
-import { Box } from "@chakra-ui/react";
+import { Box, chakra, shouldForwardProp } from "@chakra-ui/react";
+import { isValidMotionProp, motion } from "framer-motion";
 import { useState } from "react";
 import ItemCard, { ItemType } from "../components/ItemCard";
 import SearchFilters from "../components/SearchFilters";
 import useGetItems from "../hooks/useGetItems";
+
+const ChakraBox = chakra(motion.div, {
+  shouldForwardProp: (prop) =>
+    isValidMotionProp(prop) || shouldForwardProp(prop),
+});
 
 export type FiltersType = {
   category: string;
@@ -47,8 +53,16 @@ const ExplorePage = () => {
             (item: ItemType) =>
               filters.category === "" || filters.category === item.category
           )
-          .map((item: ItemType) => (
-            <ItemCard key={item.id} item={item} />
+          .map((item: ItemType, i: number) => (
+            <ChakraBox
+              key={`${item.id}-${searchText}-${filters.category}-${filters.maxPrice}-${filters.minPrice}`}
+              m={"8px"}
+              initial={{ opacity: 0, translateY: 50 }}
+              animate={{ opacity: 1, translateY: 0 }}
+              transition={{ duration: 0.25, delay: i * 0.2 } as any}
+            >
+              <ItemCard item={item} />
+            </ChakraBox>
           ))}
       </Box>
     </Box>
