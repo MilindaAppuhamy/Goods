@@ -86,6 +86,7 @@ router.post(
 //handles the count increment and decrement
 router.patch(
   "/:cartItemId",
+  auth,
   async (
     req: Request<{ cartItemId: number | string }, {}, CartItemType>,
     res: Response
