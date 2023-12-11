@@ -40,6 +40,7 @@ const RegisterForm = ({
     }
   }
 
+  let navigationTimeout: number;
   function handleSuccess() {
     //toast
     showToast("Success", "Successfully registered.", "success");
@@ -51,7 +52,7 @@ const RegisterForm = ({
     localStorage.setItem("user-token", JSON.stringify(user_token));
     localStorage.setItem("userId", JSON.stringify(user?.data));
     //navigation
-    setTimeout(() => {
+    navigationTimeout = setTimeout(() => {
       navigate("/goods/explore");
     }, 2000);
   }
@@ -60,6 +61,13 @@ const RegisterForm = ({
   useEffect(() => {
     if (isError) showToast("Error", error.response?.data as string, "error");
     if (isSuccess) handleSuccess();
+    //clear timeout cleanup
+    return () => {
+      if (navigationTimeout) {
+        //clear the timeout
+        clearTimeout(navigationTimeout);
+      }
+    };
   }, [isError, isSuccess]);
 
   return (

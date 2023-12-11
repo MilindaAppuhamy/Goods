@@ -33,7 +33,7 @@ const LoginForm = ({
   function handleSubmit(): void {
     handleLogin(input);
   }
-
+  let navigationTimeout: number;
   function handleSuccess() {
     //toast
     showToast("Success", "Successfully logged in.", "success");
@@ -45,7 +45,7 @@ const LoginForm = ({
     localStorage.setItem("user-token", JSON.stringify(user_token));
     localStorage.setItem("userId", JSON.stringify(user?.data));
     //navigation
-    setTimeout(() => {
+    navigationTimeout = setTimeout(() => {
       navigate("/goods/explore");
     }, 2000);
   }
@@ -54,6 +54,13 @@ const LoginForm = ({
   useEffect(() => {
     if (isError) showToast("Error", error.response?.data as string, "error");
     if (isSuccess) handleSuccess();
+    //clear timeout cleanup
+    return () => {
+      if (navigationTimeout) {
+        //clear the timeout
+        clearTimeout(navigationTimeout);
+      }
+    };
   }, [isError, isSuccess]);
 
   return (
