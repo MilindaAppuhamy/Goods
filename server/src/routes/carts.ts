@@ -8,9 +8,13 @@ const express = require("express");
 const router: Express = express.Router();
 router.use(express.json());
 
+//middleware
+const auth = require("../middleware/auth");
+
 //retrives all the items in the cart
 router.get(
   "/:userId",
+  auth,
   async (req: Request<{ userId: number | string }>, res: Response) => {
     //checks if the user exists
     const user = await User.findByPk(req.params.userId);
@@ -21,6 +25,7 @@ router.get(
       where: {
         userId: req.params.userId,
       },
+      include: Item,
     });
     if (!cartItems) return res.status(400).send("Cart is empty.");
 
@@ -29,48 +34,54 @@ router.get(
 );
 
 //handles adding a cart item to the cart
-router.post("/", async (req: Request<{}, {}, CartItemType>, res: Response) => {
-  try {
-    //validate the cart item
-    const { error } = validateCartItem(req.body);
-    if (error) return res.status(404).send(error.message);
+router.post(
+  "/",
+  auth,
+  async (req: Request<{}, {}, CartItemType>, res: Response) => {
+    try {
+      //validate the cart item
+      const { error } = validateCartItem(req.body);
+      if (error) return res.status(404).send(error.message);
 
-    //checks if the user exist
-    const user = await User.findByPk(req.body.userId, { include: [CartItem] });
-    if (!user) return res.status(400).send("The user is undefined.");
+      //checks if the user exist
+      const user = await User.findByPk(req.body.userId, {
+        include: [CartItem],
+      });
+      if (!user) return res.status(400).send("The user is undefined.");
 
-    //checks if the item exist
-    const item = await Item.findByPk(req.body.itemId);
-    if (!item) return res.status(404).send("Invalid item");
+      //checks if the item exist
+      const item = await Item.findByPk(req.body.itemId);
+      if (!item) return res.status(404).send("Invalid item");
 
-    //checks if the item is already in cart
-    const cartItems = await CartItem.findAll({
-      where: {
-        userId: req.body.userId,
-      },
-    });
-    const idx = cartItems.findIndex(
-      (cartItem) => cartItem.getDataValue("itemId") === req.body.itemId
-    );
-    if (idx !== -1) return res.status(400).send("Item is already in cart.");
+      //checks if the item is already in cart
+      const cartItems = await CartItem.findAll({
+        where: {
+          userId: req.body.userId,
+        },
+      });
+      const idx = cartItems.findIndex(
+        (cartItem) => cartItem.getDataValue("itemId") === req.body.itemId
+      );
+      if (idx !== -1) return res.status(400).send("Item is already in cart.");
 
-    //creating the cart item
-    const newCartItem = await CartItem.create({
-      itemId: req.body.itemId,
-      count: 1,
-    });
+      //creating the cart item
+      const newCartItem = await CartItem.create({
+        itemId: req.body.itemId,
+        count: 1,
+      });
 
-    //add to the users cart
-    await user.addCartItem(newCartItem);
+      //add to the users cart
+      await user.addCartItem(newCartItem);
 
-    //send the user with added cart items
-    await user.reload();
-    res.status(200).send(user);
-  } catch (error) {
-    if (error instanceof Error) return res.status(500).send(error.message);
-    else return res.status(500).send("An unkown server error occured.");
+      //send the user with added cart items
+      await user.reload();
+      res.status(200).send(user);
+    } catch (error) {
+      if (error instanceof Error) return res.status(500).send(error.message);
+      else return res.status(500).send("An unkown server error occured.");
+    }
   }
-});
+);
 
 //handles the count increment and decrement
 router.patch(
