@@ -24,8 +24,14 @@ class APIClient<T> {
     return response;
   };
 
-  post = async (data: T) => {
-    const response = await axios.post(this.baseUrl + this.endpoint, data);
+  post = async (data: T, headers?: object) => {
+    const axiosInstance = axios.create({
+      headers: headers,
+    });
+    const response = await axiosInstance.post(
+      this.baseUrl + this.endpoint,
+      data
+    );
     return response;
   };
 }

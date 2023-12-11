@@ -12,9 +12,13 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GoHeart } from "react-icons/go";
 import { GoHeartFill } from "react-icons/go";
+import useAddToCart from "../hooks/useAddToCart";
+import getUserHeaders from "../utils/getUserHeaders";
+import useGetUser from "../hooks/useGetUser";
+import showToast from "../utils/showToast";
 
 export type ItemType = {
   id: number;
@@ -30,9 +34,28 @@ const ItemCard = ({ item }: { item: ItemType }) => {
   const [wishlisted, setWishlisted] = useState<boolean>(false);
   const formattedPrice = `£${(item.price / 100).toFixed(2)}`;
 
-  function handleAddToCart() {
-    console.log("Added to cart:", item.name);
+  const headers = getUserHeaders();
+  const userId = JSON.parse(localStorage.getItem("userId")!);
+  const { data: user } = useGetUser(userId!, headers!);
+
+  const {
+    mutateAsync: AddToCart,
+    isSuccess,
+    isError,
+    error,
+  } = useAddToCart(headers!);
+
+  async function handleAddToCart() {
+    await AddToCart({
+      itemId: item.id,
+      userId: user?.data.id,
+    });
   }
+
+  useEffect(() => {
+    if (isError) showToast("Error", error.response?.data as string, "error");
+    if (isSuccess) showToast("Success", "Successfully added item.", "success");
+  }, [isError, isSuccess]);
 
   function handleAddToWishList() {
     setWishlisted(!wishlisted);
