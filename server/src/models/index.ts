@@ -9,3 +9,7 @@ Item.belongsTo(User);
 //User - CartItem association
 User.hasMany(CartItem);
 CartItem.belongsTo(User);
+
+//Item - CartItem association
+Item.hasOne(CartItem);
+CartItem.belongsTo(Item);

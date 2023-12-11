@@ -105,7 +105,7 @@ router.post(
       req.body.password,
       user.getDataValue("password")
     );
-    if (!result) return res.status(404).send("Incorrect email or password.");
+    if (!result) return res.status(401).send("Incorrect email or password.");
 
     //setting the auth token
     const token = user.generateAuthToken();
