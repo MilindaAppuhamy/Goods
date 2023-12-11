@@ -6,7 +6,8 @@ const OrderSummary = ({ userCart }: { userCart: CartType }) => {
     ?.map((cartItem) => cartItem?.item?.price! * cartItem?.count!)
     .reduce((acc, curr) => acc + curr, 0);
 
-  const formattedTotal = `£${(total / 100).toFixed(2)}`;
+  const formattedTotal =
+    isNaN(total) || !total ? "£0.00" : `£${(total / 100).toFixed(2)}`;
 
   return (
     <Box

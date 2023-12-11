@@ -34,6 +34,22 @@ class APIClient<T> {
     );
     return response;
   };
+
+  updateCart = async (
+    id: number | string,
+    data: T,
+    query: string,
+    headers?: object
+  ) => {
+    const axiosInstance = axios.create({
+      headers: headers,
+    });
+    const response = await axiosInstance.patch(
+      this.baseUrl + this.endpoint + "/" + id + "?action=" + query,
+      data
+    );
+    return response;
+  };
 }
 
 export default APIClient;
