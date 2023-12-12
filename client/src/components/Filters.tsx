@@ -7,11 +7,8 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
   NumberInput,
   NumberInputField,
-  NumberInputStepper,
   Select,
   Stack,
   Text,
@@ -108,28 +105,20 @@ const Filters = ({
             </Select>
 
             <Stack mt={5}>
-              <Text>Min price</Text>
+              <Text>Min price (in cents)</Text>
               <NumberInput min={0} defaultValue={inputs.minPrice}>
                 <NumberInputField name="minPrice" onChange={handleChange} />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
               </NumberInput>
             </Stack>
 
             <Stack mt={5}>
-              <Text>Max price</Text>
+              <Text>Max price (in cents)</Text>
               <NumberInput
                 min={1}
                 max={maxPrice}
                 defaultValue={inputs.maxPrice}
               >
                 <NumberInputField name="maxPrice" onChange={handleChange} />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
               </NumberInput>
             </Stack>
           </ModalBody>
