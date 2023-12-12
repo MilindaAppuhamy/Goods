@@ -64,11 +64,18 @@ router.post(
       );
       if (idx !== -1) return res.status(400).send("Item is already in cart.");
 
+      //checks if item has enough stock for the order
+      const itemStock: number = item.getDataValue("quantity");
+      if (itemStock <= 0) return res.status(404).send("Item is out of stock");
+
       //creating the cart item
       const newCartItem = await CartItem.create({
         itemId: req.body.itemId,
         count: 1,
       });
+
+      //substracting the ordered count from the quantity
+      await item.update({ quantity: itemStock - 1 });
 
       //add to the users cart
       await user.addCartItem(newCartItem);
@@ -113,29 +120,46 @@ router.patch(
     });
     if (!cartItem) return res.status(400).send("The cart item does not exist.");
 
+    //getting the remaining item stock
+    const itemStock: number = item.getDataValue("quantity");
+
     //update the count depending on the query
     const action = req.query.action;
+
     if (
       (action === "decrement" && cartItem.getDataValue("count")! > 1) ||
       (action === "increment" && cartItem.getDataValue("count")! >= 1)
     ) {
       switch (action) {
         case "increment":
+          //checks if item has enough stock for the order
+
+          if (itemStock <= 0)
+            return res.status(404).send("Item is out of stock");
+
           await cartItem.update({
             count: cartItem.getDataValue("count")! + 1,
           });
+
+          //substracting the ordered count from the quantity
+          await item.update({ quantity: itemStock - 1 });
           break;
 
         case "decrement":
           await cartItem.update({
             count: cartItem.getDataValue("count")! - 1,
           });
+
+          //adding the substracted item count to the quantity
+          await item.update({ quantity: itemStock + 1 });
           break;
 
         default:
           return res.status(400).send("Invalid API call");
       }
     } else {
+      //adding the substracted item count to the quantity
+      await item.update({ quantity: itemStock + 1 });
       await cartItem.destroy();
     }
 
