@@ -11,7 +11,7 @@ const UserAccountDetails = () => {
   return error ? (
     <Navigate to={"/"} />
   ) : (
-    <Box pt={2} display={"flex"} alignItems={"center"}>
+    <Box pt={{ lg: 2, base: 1 }} display={"flex"} alignItems={"center"}>
       <Image
         src="https://img.freepik.com/free-vector/cute-happy-penguin-cartoon-icon-illustration-animal-nature-icon-concept-isolated-flat-cartoon-style_138676-2095.jpg"
         width={"60px"}

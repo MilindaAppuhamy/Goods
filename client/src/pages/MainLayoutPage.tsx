@@ -1,6 +1,7 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 import SideNav from "../components/SideNav";
+import SideDrawer from "../components/SideDrawer";
 
 const MainLayoutPage = () => {
   return (
@@ -21,6 +22,9 @@ const MainLayoutPage = () => {
 
         <GridItem area={"main"} pl={1}>
           <Outlet />
+          <Show below="lg">
+            <SideDrawer />
+          </Show>
         </GridItem>
       </Grid>
     </>

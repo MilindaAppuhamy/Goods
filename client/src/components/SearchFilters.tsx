@@ -27,9 +27,9 @@ const SearchFilters = ({
       width={"100%"}
       display={"flex"}
       justifyContent={"center"}
-      pt={4}
+      pt={{ lg: 4, base: 1.5 }}
       pb={4}
-      pr={{ lg: "280px", base: "0px" }}
+      pr={{ lg: "280px", base: "60px" }}
       zIndex={5}
     >
       <form onSubmit={handleSubmit} style={{ width: "70%", maxWidth: "400px" }}>

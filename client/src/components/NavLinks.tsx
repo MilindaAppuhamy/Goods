@@ -65,7 +65,7 @@ const NavLinks = () => {
 
   return (
     <List
-      mt={12}
+      mt={{ lg: 12, base: 3 }}
       width={"100%"}
       display={"flex"}
       flexDir={"column"}
