@@ -1,4 +1,4 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, Skeleton } from "@chakra-ui/react";
 import AddMyStoreItem from "../components/AddMyStoreItem";
 import { ItemType } from "../components/ItemCard";
 import MyStoreItem from "../components/myStoreItem";
@@ -10,7 +10,7 @@ const MyStorePage = () => {
   const headers = getUserHeaders();
   const userId = JSON.parse(localStorage.getItem("userId")!);
   //getting the user
-  const { data: user } = useGetUser(userId!, headers!);
+  const { data: user, isLoading } = useGetUser(userId!, headers!);
   const username = user?.data.username;
 
   //getting the user's items
@@ -26,14 +26,16 @@ const MyStorePage = () => {
         m={{ lg: 3, base: 0 }}
         p={4}
       >
-        <Heading
-          fontSize={"larger"}
-          color={"#5D3FD3"}
-          mb={30}
-          textAlign={{ lg: "left", base: "center" }}
-        >
-          {`${username}'s store`}
-        </Heading>
+        <Skeleton isLoaded={!isLoading} width={"max-content"}>
+          <Heading
+            fontSize={"larger"}
+            color={"#5D3FD3"}
+            mb={30}
+            textAlign={{ lg: "left", base: "center" }}
+          >
+            {`${username}'s store`}
+          </Heading>
+        </Skeleton>
 
         <AddMyStoreItem />
 
