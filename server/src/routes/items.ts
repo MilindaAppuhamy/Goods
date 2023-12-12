@@ -43,6 +43,7 @@ router.get(
 //post an item
 router.post(
   "/",
+  auth,
   async (
     req: Request<{}, {}, ItemType & { userId: number }>, //req.body type is the type of the item and the userId: number
     res: Response
@@ -89,6 +90,7 @@ router.post(
 //update an item
 router.patch(
   "/:id",
+  auth,
   async (
     req: Request<{ id: number | string }, {}, ItemType & { userId: number }>,
     res: Response
@@ -130,6 +132,7 @@ router.patch(
 //delete an item
 router.delete(
   "/:id",
+  auth,
   async (req: Request<{ id: number | string }>, res: Response) => {
     //checks if the item exists
     const item = await Item.findByPk(req.params.id);
