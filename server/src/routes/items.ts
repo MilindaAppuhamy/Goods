@@ -8,6 +8,9 @@ const express = require("express");
 const router: Express = express.Router();
 router.use(express.json());
 
+//middleware
+const auth = require("../middleware/auth");
+
 //get all items endpoint
 router.get("/", async (req: Request, res: Response) => {
   const items = await Item.findAll({
@@ -16,11 +19,21 @@ router.get("/", async (req: Request, res: Response) => {
   res.send(items);
 });
 
-//item by id
+//item by userId
 router.get(
-  "/:id",
-  async (req: Request<{ id: number | string }>, res: Response) => {
-    const item = await Item.findByPk(req.params.id);
+  "/:userId",
+  auth,
+  async (req: Request<{ userId: number | string }>, res: Response) => {
+    //checks if the user exists
+    const user = await User.findByPk(req.params.userId);
+    if (!user) return res.status(400).send("The user is undefined.");
+
+    const item = await Item.findAll({
+      where: {
+        userId: req.params.userId,
+      },
+      include: User,
+    });
     if (!item) return res.status(400).send("Item does not exist.");
 
     return res.status(200).send(item);
