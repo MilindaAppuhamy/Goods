@@ -11,10 +11,22 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import MyStoreItemForm, { ItemInputType } from "./MyStoreItemForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useAddItem from "../hooks/useAddItem";
+import getUserHeaders from "../utils/getUserHeaders";
+import showToast from "../utils/showToast";
 
 const AddMyStoreItem = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const headers = getUserHeaders();
+  const userId = JSON.parse(localStorage.getItem("userId")!);
+  const {
+    mutateAsync: addMyStoreItem,
+    isSuccess,
+    isError,
+    error,
+  } = useAddItem(headers!);
+
   const [input, setInput] = useState<ItemInputType>({
     name: "",
     category: "",
@@ -24,9 +36,16 @@ const AddMyStoreItem = () => {
     quantity: 0,
   });
 
-  function handleAddMyStoreItem() {
+  async function handleAddMyStoreItem() {
+    await addMyStoreItem({ ...input, userId: userId });
     onClose();
   }
+
+  useEffect(() => {
+    if (isError) showToast("Error", error.response?.data as string, "error");
+    if (isSuccess)
+      showToast("Success", "Successfully added item to your store.", "success");
+  }, [isError, isSuccess]);
 
   return (
     <>

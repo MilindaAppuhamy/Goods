@@ -35,6 +35,27 @@ class APIClient<T> {
     return response;
   };
 
+  update = async (id: number | string, data: T, headers?: object) => {
+    const axiosInstance = axios.create({
+      headers: headers,
+    });
+    const response = await axiosInstance.patch(
+      this.baseUrl + this.endpoint + "/" + id,
+      data
+    );
+    return response;
+  };
+
+  delete = async (id: number | string, headers?: object) => {
+    const axiosInstance = axios.create({
+      headers: headers,
+    });
+    const response = await axiosInstance.delete(
+      this.baseUrl + this.endpoint + "/" + id
+    );
+    return response;
+  };
+
   updateCart = async (
     id: number | string,
     data: T,

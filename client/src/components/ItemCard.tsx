@@ -54,7 +54,8 @@ const ItemCard = ({ item }: { item: ItemType }) => {
 
   useEffect(() => {
     if (isError) showToast("Error", error.response?.data as string, "error");
-    if (isSuccess) showToast("Success", "Successfully added item.", "success");
+    if (isSuccess)
+      showToast("Success", "Successfully added to cart.", "success");
   }, [isError, isSuccess]);
 
   function handleAddToWishList() {

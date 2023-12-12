@@ -9,6 +9,7 @@ export type ItemInputType = {
   price: number;
   description: string;
   quantity: number;
+  userId?: number | string;
 };
 
 const MyStoreItemForm = ({

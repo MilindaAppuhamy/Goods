@@ -11,16 +11,33 @@ import {
 } from "@chakra-ui/react";
 import { MdDelete } from "react-icons/md";
 import { ItemType } from "./ItemCard";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import getUserHeaders from "../utils/getUserHeaders";
+import useDeleteItem from "../hooks/useDeleteItem";
+import showToast from "../utils/showToast";
 
 const DeleteMyStoreItem = ({ deletingItem }: { deletingItem: ItemType }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<any>();
+  const headers = getUserHeaders();
 
-  function handleDeleteMyStoreItem() {
-    console.log(deletingItem);
+  const {
+    mutateAsync: deleteMyStoreItem,
+    isSuccess,
+    isError,
+    error,
+  } = useDeleteItem(deletingItem.id, headers!);
+
+  async function handleDeleteMyStoreItem() {
+    await deleteMyStoreItem();
     onClose();
   }
+
+  useEffect(() => {
+    if (isError) showToast("Error", error.response?.data as string, "error");
+    if (isSuccess)
+      showToast("Success", "Successfully deleted item .", "success");
+  }, [isError, isSuccess]);
 
   return (
     <>
