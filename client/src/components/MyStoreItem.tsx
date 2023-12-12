@@ -76,8 +76,8 @@ const MyStoreItem = ({ item }: { item: ItemType }) => {
           alignItems={"center"}
           px={1}
         >
-          <EditMyStoreItem />
-          <DeleteMyStoreItem />
+          <EditMyStoreItem updatingItem={item} />
+          <DeleteMyStoreItem deletingItem={item} />
         </Box>
       </Stack>
     </Card>

@@ -1,20 +1,22 @@
 import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 import { useState } from "react";
-import { LoginInputType } from "./LoginForm";
-import { RegisterInputType } from "./RegisterForm";
 
 const InputField = ({
   value,
   input,
   label,
   setInput,
+  defaultValue,
 }: {
   value: string;
-  input: RegisterInputType | LoginInputType;
+  input: any;
   label: string;
   setInput: React.Dispatch<React.SetStateAction<any>>;
+  defaultValue?: string | number;
 }) => {
-  const [moveLabel, setMoveLabel] = useState<boolean>(false);
+  const [moveLabel, setMoveLabel] = useState<boolean>(
+    defaultValue ? true : false
+  );
 
   return (
     <FormControl mb={5} maxW={"500px"}>
@@ -41,7 +43,8 @@ const InputField = ({
             ? "password"
             : "text"
         }
-        value={(input as any)[value]}
+        // value={(input as any)[value]}
+        defaultValue={defaultValue}
         placeholder={label}
         focusBorderColor={"#5D3FD3"}
         _placeholder={{ color: "transparent" }}
