@@ -21,12 +21,12 @@ const SideDrawer = () => {
 
   return (
     <>
-      <Box position={"fixed"} top={"10px"} right={3} zIndex={30}>
+      <Box position={"fixed"} top={"10px"} right={4} zIndex={30}>
         <IconButton
           aria-label="drawer-button"
           icon={isOpen ? <IoClose /> : <IoMenu />}
           borderRadius={"50%"}
-          border={colorMode === "light" ? "1px solid black" : "1px solid black"}
+          border={colorMode === "light" ? "" : "1px solid black"}
           colorScheme={"purple"}
           onClick={onOpen}
         />
