@@ -13,7 +13,7 @@ export default function showToast(
     title: title,
     description: desc,
     status: status,
-    duration: 3000,
+    duration: 1000,
     isClosable: true,
   });
 }
