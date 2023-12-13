@@ -4,6 +4,7 @@ import { Sequelize } from "sequelize";
 import { userRouter } from "./routes/users";
 import { itemRouter } from "./routes/items";
 import { cartRouter } from "./routes/carts";
+import { paymentRouter } from "./routes/payment";
 
 //imports
 const express = require("express");
@@ -19,7 +20,7 @@ const PORT = process.env.PORT || 3000;
 app.use(
   cors({
     exposedHeaders: ["x-auth-token"],
-    origin: "http://localhost:5173",
+    origin: process.env.DOMAIN,
   })
 );
 
@@ -27,6 +28,7 @@ app.use(
 app.use("/api/users", userRouter);
 app.use("/api/items", itemRouter);
 app.use("/api/carts", cartRouter);
+app.use("/create-checkout-session", paymentRouter);
 
 //generic GET request
 app.get("/", (req: Request, res: Response) => {

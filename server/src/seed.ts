@@ -31,11 +31,9 @@ const seed = async () => {
 
   //hashing the passwords
   for (let user of users) {
-    console.log(user.password);
     const salt: string = await bcrypt.genSalt(6);
     let hashedPassword = await bcrypt.hash(user.password, salt);
     await user.update({ password: hashedPassword });
-    console.log(user.password);
   }
 
   //adding some items to users
