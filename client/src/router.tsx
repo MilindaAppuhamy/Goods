@@ -6,6 +6,7 @@ import WishlistPage from "./pages/WishlistPage";
 import BasketPage from "./pages/BasketPage";
 import MyStorePage from "./pages/MyStorePage";
 import SettingsPage from "./pages/SettingsPage";
+import PaymentResultPage from "./pages/PaymentResultPage";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
           },
         ],
       },
+      { path: "payment", element: <PaymentResultPage /> },
     ],
   },
 ]);

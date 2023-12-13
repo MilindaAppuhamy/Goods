@@ -8,6 +8,7 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { CartType } from "../pages/BasketPage";
+import Payment from "./Payment";
 
 const OrderSummary = ({ userCart }: { userCart: CartType }) => {
   const { colorMode } = useColorMode();
@@ -78,6 +79,7 @@ const OrderSummary = ({ userCart }: { userCart: CartType }) => {
           {formattedTotal}
         </Text>
       </Box>
+      <Payment userCart={userCart} total={formattedTotal} />
     </Box>
   );
 };
