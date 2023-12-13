@@ -77,7 +77,9 @@ const LoginForm = ({
       justifyContent={"center"}
       alignItems={"center"}
     >
-      <Heading mb={4}>Login .</Heading>
+      <Heading mb={4} color={"black"}>
+        Login .
+      </Heading>
       <InputField
         value="email"
         input={input}

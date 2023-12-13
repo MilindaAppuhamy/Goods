@@ -82,7 +82,9 @@ const RegisterForm = ({
       justifyContent={"center"}
       alignItems={"center"}
     >
-      <Heading mb={4}>Register .</Heading>
+      <Heading mb={4} color={"black"}>
+        Register .
+      </Heading>
       <InputField
         value="username"
         input={input}

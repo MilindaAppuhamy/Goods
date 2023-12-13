@@ -1,7 +1,17 @@
-import { Box, Container, Divider, Flex, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Divider,
+  Flex,
+  Heading,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
 import { CartType } from "../pages/BasketPage";
 
 const OrderSummary = ({ userCart }: { userCart: CartType }) => {
+  const { colorMode } = useColorMode();
+
   const total = userCart
     ?.map((cartItem) => cartItem?.item?.price! * cartItem?.count!)
     .reduce((acc, curr) => acc + curr, 0);
@@ -15,11 +25,15 @@ const OrderSummary = ({ userCart }: { userCart: CartType }) => {
       ml={{ md: 1, base: 0 }}
       width={"98%"}
       height={"max-content"}
-      backgroundColor={"white"}
+      backgroundColor={colorMode === "light" ? "white" : "#323232"}
       borderRadius={"lg"}
       p={{ md: 3, base: 2 }}
     >
-      <Heading fontSize={"larger"} color={"#5D3FD3"} mb={30}>
+      <Heading
+        fontSize={"larger"}
+        color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
+        mb={30}
+      >
         Order summary
       </Heading>
       <Box>
@@ -28,7 +42,10 @@ const OrderSummary = ({ userCart }: { userCart: CartType }) => {
             <Flex justifyContent={"space-between"} my={3}>
               <Box width={"60%"}>
                 <Text fontWeight={"medium"}>{cartItem.item?.name}</Text>
-                <Text fontSize={"medium"} color={"GrayText"}>
+                <Text
+                  fontSize={"medium"}
+                  color={colorMode === "light" ? "GrayText" : "#C0C0C0"}
+                >
                   x {cartItem.count}
                 </Text>
               </Box>
@@ -41,7 +58,7 @@ const OrderSummary = ({ userCart }: { userCart: CartType }) => {
       <Box
         height={"1px"}
         width={"100%"}
-        backgroundColor={"black"}
+        backgroundColor={colorMode === "light" ? "black" : "white"}
         borderRadius={3}
         mt={4}
         mb={3}
@@ -54,7 +71,10 @@ const OrderSummary = ({ userCart }: { userCart: CartType }) => {
         mb={3}
       >
         <Text fontWeight={"bold"}>Total:</Text>
-        <Text fontWeight={"bold"} color={"#5D3FD3"}>
+        <Text
+          fontWeight={"bold"}
+          color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
+        >
           {formattedTotal}
         </Text>
       </Box>

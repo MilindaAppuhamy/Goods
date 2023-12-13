@@ -1,9 +1,10 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem, Show, useColorMode } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
 import SideNav from "../components/SideNav";
 import SideDrawer from "../components/SideDrawer";
 
 const MainLayoutPage = () => {
+  const { colorMode } = useColorMode();
   return (
     <>
       <Grid
@@ -11,7 +12,7 @@ const MainLayoutPage = () => {
         gridTemplateRows={"1fr"}
         gridTemplateColumns={{ lg: "280px 1fr", base: "1fr" }}
         minHeight={"100vh"}
-        backgroundColor={"#CCCCFF"}
+        backgroundColor={colorMode === "light" ? "#CCCCFF" : "#CF9FFF"}
         p={1}
       >
         <Show above="lg">

@@ -1,8 +1,9 @@
-import { Box, Heading } from "@chakra-ui/react";
+import { Box, Heading, useColorMode } from "@chakra-ui/react";
 import UserAccountDetails from "./UserAccountDetails";
 import NavLinks from "./NavLinks";
 
 const SideNav = () => {
+  const { colorMode } = useColorMode();
   return (
     <Box
       display={"flex"}
@@ -11,12 +12,12 @@ const SideNav = () => {
       height={"100%"}
       width={"280px"}
       borderRadius={20}
-      backgroundColor={"white"}
+      backgroundColor={colorMode === "light" ? "white" : "#323232"}
       boxShadow={"2px 2px 10px #787878"}
       position={"fixed"}
     >
       <Heading
-        color={"#5D3FD3"}
+        color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
         fontWeight={"bold"}
         fontSize={"32px"}
         fontFamily={"sans-serif"}

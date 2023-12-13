@@ -6,12 +6,14 @@ import {
   Image,
   Stack,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 import DeleteMyStoreItem from "./DeleteMyStoreItem";
 import EditMyStoreItem from "./EditMyStoreItem";
 import { ItemType } from "./ItemCard";
 
 const MyStoreItem = ({ item }: { item: ItemType }) => {
+  const { colorMode } = useColorMode();
   const formattedPrice = `£${(item.price / 100).toFixed(2)}`;
 
   return (
@@ -53,18 +55,31 @@ const MyStoreItem = ({ item }: { item: ItemType }) => {
           </Box>
 
           {item.quantity > 10 ? (
-            <Text pt={3} color={"green"} fontWeight={"medium"}>
+            <Text
+              pt={3}
+              color={colorMode === "light" ? "green" : "#50C878"}
+              fontWeight={"medium"}
+            >
               {item.quantity} items left in the stock.
             </Text>
           ) : (
-            <Text pt={3} color={"red"} fontWeight={"medium"}>
+            <Text
+              pt={3}
+              color={colorMode === "light" ? "red" : "#FF5733"}
+              fontWeight={"medium"}
+            >
               Only {item.quantity} items left in the stock.
             </Text>
           )}
 
           <Text pt="2">"{item.description}"</Text>
 
-          <Text color="#5D3FD3" fontSize="lg" pt={2} fontWeight={"bold"}>
+          <Text
+            color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
+            fontSize="lg"
+            pt={2}
+            fontWeight={"bold"}
+          >
             {formattedPrice}
           </Text>
         </CardBody>

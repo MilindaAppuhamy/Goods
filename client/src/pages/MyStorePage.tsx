@@ -1,4 +1,4 @@
-import { Box, Heading, Skeleton } from "@chakra-ui/react";
+import { Box, Heading, Skeleton, useColorMode } from "@chakra-ui/react";
 import AddMyStoreItem from "../components/AddMyStoreItem";
 import { ItemType } from "../components/ItemCard";
 import MyStoreItem from "../components/myStoreItem";
@@ -7,6 +7,7 @@ import useGetUserItems from "../hooks/useGetUserItems";
 import getUserHeaders from "../utils/getUserHeaders";
 
 const MyStorePage = () => {
+  const { colorMode } = useColorMode();
   const headers = getUserHeaders();
   const userId = JSON.parse(localStorage.getItem("userId")!);
   //getting the user
@@ -21,7 +22,7 @@ const MyStorePage = () => {
       <Box
         width={"98%"}
         minHeight={{ lg: "98%", base: "100%" }}
-        backgroundColor={"white"}
+        backgroundColor={colorMode === "light" ? "white" : "#323232"}
         borderRadius={"lg"}
         m={{ lg: 3, base: 0 }}
         p={4}
@@ -29,7 +30,7 @@ const MyStorePage = () => {
         <Skeleton isLoaded={!isLoading} width={"max-content"}>
           <Heading
             fontSize={"larger"}
-            color={"#5D3FD3"}
+            color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
             mb={30}
             textAlign={{ lg: "left", base: "center" }}
           >

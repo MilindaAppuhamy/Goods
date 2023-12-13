@@ -1,9 +1,10 @@
-import { Box, Image, Skeleton, Text } from "@chakra-ui/react";
+import { Box, Image, Skeleton, Text, useColorMode } from "@chakra-ui/react";
 import useGetUser from "../hooks/useGetUser";
 import getUserHeaders from "../utils/getUserHeaders";
 import { Navigate } from "react-router-dom";
 
 const UserAccountDetails = () => {
+  const { colorMode } = useColorMode();
   const headers = getUserHeaders();
   const userId = JSON.parse(localStorage.getItem("userId")!);
   const { data: user, error, isLoading } = useGetUser(userId!, headers!);
@@ -26,12 +27,20 @@ const UserAccountDetails = () => {
         alignItems={"flex-start"}
       >
         <Skeleton isLoaded={!isLoading}>
-          <Text fontFamily={"sans-serif"} fontSize={"14px"} color={"grey"}>
+          <Text
+            fontFamily={"sans-serif"}
+            fontSize={"14px"}
+            color={colorMode === "light" ? "grey" : "white"}
+          >
             {user?.data.email}
           </Text>
         </Skeleton>
         <Skeleton isLoaded={!isLoading}>
-          <Text fontFamily={"sans-serif"} fontSize={"18px"} color={"black"}>
+          <Text
+            fontFamily={"sans-serif"}
+            fontSize={"18px"}
+            color={colorMode === "light" ? "black" : "white"}
+          >
             {user?.data.username}
           </Text>
         </Skeleton>

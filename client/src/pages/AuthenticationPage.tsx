@@ -1,11 +1,12 @@
 import LoginForm, { LoginInputType } from "../components/LoginForm";
 import RegisterForm, { RegisterInputType } from "../components/RegisterForm";
 import BackdropCircle from "../components/BackdropCircle";
-import { Box, Center } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { Box, Center, useColorMode } from "@chakra-ui/react";
+import { useEffect, useRef, useState } from "react";
 import { useSize } from "@chakra-ui/react-use-size";
 
 const AuthenticationPage = () => {
+  const { colorMode, toggleColorMode } = useColorMode();
   const elementRef = useRef<any>();
   const width = useSize(elementRef)?.width;
   const height = useSize(elementRef)?.height;
@@ -19,6 +20,14 @@ const AuthenticationPage = () => {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    function changeColorMode() {
+      if (colorMode === "dark") toggleColorMode();
+      return;
+    }
+    changeColorMode();
+  }, []);
 
   return (
     <Center

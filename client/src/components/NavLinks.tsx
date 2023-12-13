@@ -1,4 +1,4 @@
-import { List, ListIcon, ListItem } from "@chakra-ui/react";
+import { List, ListIcon, ListItem, useColorMode } from "@chakra-ui/react";
 import { stagger, useAnimate } from "framer-motion";
 import { MouseEvent, useEffect, useState } from "react";
 import {
@@ -14,6 +14,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const NavLinks = () => {
+  const { colorMode } = useColorMode();
   const { pathname } = useLocation();
   const [isOpen, setIsOpen] = useState<boolean>(true);
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ const NavLinks = () => {
 
   return (
     <List
-      mt={{ lg: 12, base: 3 }}
+      mt={{ lg: 12, base: 6 }}
       width={"100%"}
       display={"flex"}
       flexDir={"column"}
@@ -74,6 +75,7 @@ const NavLinks = () => {
       ref={scope}
     >
       <ListItem
+        backgroundColor={"transparent"}
         fontFamily={"sans-serif"}
         fontWeight={"normal"}
         fontSize={"large"}
@@ -97,7 +99,7 @@ const NavLinks = () => {
           width={"32px"}
           height={"32px"}
           as={CiShoppingTag}
-          color={"#5D3FD3"}
+          color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
           mr={4}
         />
         Shop
@@ -105,7 +107,7 @@ const NavLinks = () => {
           width={"16px"}
           height={"16px"}
           as={FaChevronDown}
-          color={"#5D3FD3"}
+          color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
           ml={"50px"}
           transform={isOpen ? "rotate(0deg)" : "rotate(90deg)"}
           transition={"all 0.3s"}
@@ -133,14 +135,16 @@ const NavLinks = () => {
           }}
           onClick={(e) => handleClick(e)}
           backgroundColor={
-            pathname.includes("explore") ? "rgb(203, 195, 227, 0.4)" : "white"
+            pathname.includes("explore")
+              ? "rgb(203, 195, 227, 0.4)"
+              : "transparent"
           }
         >
           <ListIcon
             width={"32px"}
             height={"32px"}
             as={CiStreamOn}
-            color={"#5D3FD3"}
+            color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
             mr={4}
           />
           Explore
@@ -165,14 +169,16 @@ const NavLinks = () => {
           }}
           onClick={(e) => handleClick(e)}
           backgroundColor={
-            pathname.includes("wishlist") ? "rgb(203, 195, 227, 0.4)" : "white"
+            pathname.includes("wishlist")
+              ? "rgb(203, 195, 227, 0.4)"
+              : "transparent"
           }
         >
           <ListIcon
             width={"32px"}
             height={"32px"}
             as={CiHeart}
-            color={"#5D3FD3"}
+            color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
             mr={4}
           />
           Wishlist
@@ -197,14 +203,16 @@ const NavLinks = () => {
         }}
         onClick={(e) => handleClick(e)}
         backgroundColor={
-          pathname.includes("basket") ? "rgb(203, 195, 227, 0.4)" : "white"
+          pathname.includes("basket")
+            ? "rgb(203, 195, 227, 0.4)"
+            : "transparent"
         }
       >
         <ListIcon
           width={"32px"}
           height={"32px"}
           as={CiShoppingBasket}
-          color={"#5D3FD3"}
+          color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
           mr={4}
         />
         Basket
@@ -228,14 +236,16 @@ const NavLinks = () => {
         }}
         onClick={(e) => handleClick(e)}
         backgroundColor={
-          pathname.includes("my%20store") ? "rgb(203, 195, 227, 0.4)" : "white"
+          pathname.includes("my%20store")
+            ? "rgb(203, 195, 227, 0.4)"
+            : "transparent"
         }
       >
         <ListIcon
           width={"32px"}
           height={"32px"}
           as={CiShop}
-          color={"#5D3FD3"}
+          color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
           mr={4}
         />
         My store
@@ -259,20 +269,23 @@ const NavLinks = () => {
         }}
         onClick={(e) => handleClick(e)}
         backgroundColor={
-          pathname.includes("settings") ? "rgb(203, 195, 227, 0.4)" : "white"
+          pathname.includes("settings")
+            ? "rgb(203, 195, 227, 0.4)"
+            : "transparent"
         }
       >
         <ListIcon
           width={"32px"}
           height={"32px"}
           as={CiSettings}
-          color={"#5D3FD3"}
+          color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
           mr={4}
         />
         Settings
       </ListItem>
 
       <ListItem
+        backgroundColor={"transparent"}
         fontFamily={"sans-serif"}
         fontWeight={"normal"}
         fontSize={"large"}
@@ -297,7 +310,7 @@ const NavLinks = () => {
           width={"32px"}
           height={"32px"}
           as={CiLogout}
-          color={"#5D3FD3"}
+          color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
           mr={4}
         />
         Logout

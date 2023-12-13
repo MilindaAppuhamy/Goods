@@ -11,6 +11,7 @@ import {
   Image,
   Stack,
   Text,
+  useColorMode,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { GoHeart } from "react-icons/go";
@@ -31,6 +32,7 @@ export type ItemType = {
 };
 
 const ItemCard = ({ item }: { item: ItemType }) => {
+  const { colorMode } = useColorMode();
   const [wishlisted, setWishlisted] = useState<boolean>(false);
   const formattedPrice = `£${(item.price / 100).toFixed(2)}`;
 
@@ -64,7 +66,11 @@ const ItemCard = ({ item }: { item: ItemType }) => {
   }
 
   return (
-    <Card w={"320px"} m={"8px"}>
+    <Card
+      w={"320px"}
+      m={"8px"}
+      backgroundColor={colorMode === "light" ? "white" : "#323232"}
+    >
       <CardBody>
         <Center>
           <Image
@@ -78,7 +84,10 @@ const ItemCard = ({ item }: { item: ItemType }) => {
         <Stack mt="6" spacing="3">
           <Heading size="md">{item.name}</Heading>
           <Text>{item.description}</Text>
-          <Text color="#5D3FD3" fontSize="2xl">
+          <Text
+            color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
+            fontSize="2xl"
+          >
             {formattedPrice}
           </Text>
         </Stack>
@@ -102,8 +111,8 @@ const ItemCard = ({ item }: { item: ItemType }) => {
           </Button>
           <IconButton
             variant="outline"
-            color="#5D3FD3"
-            border={"1px solid #5D3FD3"}
+            color={colorMode === "light" ? "#5D3FD3" : "#CF9FFF"}
+            border={`1px solid ${colorMode === "light" ? "#5D3FD3" : "white"}`}
             aria-label="Add to wishlist"
             onClick={handleAddToWishList}
             icon={wishlisted ? <GoHeartFill /> : <GoHeart />}

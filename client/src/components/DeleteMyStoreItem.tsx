@@ -7,6 +7,7 @@ import {
   AlertDialogOverlay,
   Button,
   IconButton,
+  useColorMode,
   useDisclosure,
 } from "@chakra-ui/react";
 import { MdDelete } from "react-icons/md";
@@ -17,6 +18,7 @@ import useDeleteItem from "../hooks/useDeleteItem";
 import showToast from "../utils/showToast";
 
 const DeleteMyStoreItem = ({ deletingItem }: { deletingItem: ItemType }) => {
+  const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef<any>();
   const headers = getUserHeaders();
@@ -70,7 +72,8 @@ const DeleteMyStoreItem = ({ deletingItem }: { deletingItem: ItemType }) => {
                 Cancel
               </Button>
               <Button
-                colorScheme="red"
+                color={"white"}
+                backgroundColor={colorMode === "light" ? "#EE4B2B" : "#FF5733"}
                 onClick={handleDeleteMyStoreItem}
                 ml={3}
               >
