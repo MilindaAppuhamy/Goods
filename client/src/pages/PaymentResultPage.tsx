@@ -1,15 +1,142 @@
-import { Center, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Center,
+  Heading,
+  Text,
+  useColorMode,
+} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { NavigateFunction, useNavigate } from "react-router-dom";
+
+const SuccessMessage = ({
+  navigate,
+  logout,
+}: {
+  navigate: NavigateFunction;
+  logout: () => void;
+}) => {
+  return (
+    <Box
+      width={"95%"}
+      height={"max-content"}
+      p={4}
+      maxW={"600px"}
+      borderRadius={"lg"}
+      backgroundColor={"#AFE1AF"}
+    >
+      <Heading fontSize={"x-large"} mt={3} color={"black"}>
+        Thank you!
+      </Heading>
+      <Text my={5} color={"black"}>
+        Your order has been placed! You will receive an email confirmation
+        shortly.
+      </Text>
+      <ButtonGroup my={4}>
+        <Button
+          color={"white"}
+          backgroundColor={"#5D3FD3"}
+          _hover={{ opacity: 0.7 }}
+          onClick={() => navigate("/goods/explore")}
+        >
+          Keep exploring
+        </Button>
+        <Button
+          colorScheme="black"
+          variant="outline"
+          color={"black"}
+          onClick={logout}
+        >
+          Logout
+        </Button>
+      </ButtonGroup>
+    </Box>
+  );
+};
+
+const CanceledMessage = ({
+  navigate,
+  logout,
+}: {
+  navigate: NavigateFunction;
+  logout: () => void;
+}) => {
+  return (
+    <Box
+      width={"95%"}
+      height={"max-content"}
+      p={4}
+      maxW={"600px"}
+      borderRadius={"lg"}
+      backgroundColor={"#FAA0A0"}
+    >
+      <Heading fontSize={"x-large"} mt={3} color={"black"}>
+        Oops!
+      </Heading>
+      <Text my={5} color={"black"}>
+        Your order has been canceled. Continue to shop around and checkout when
+        you're ready.
+      </Text>
+      <ButtonGroup my={4}>
+        <Button
+          color={"white"}
+          backgroundColor={"#5D3FD3"}
+          _hover={{ opacity: 0.7 }}
+          onClick={() => navigate("/goods/explore")}
+        >
+          Back to exploring
+        </Button>
+        <Button
+          colorScheme="black"
+          variant="outline"
+          color={"black"}
+          onClick={logout}
+        >
+          Logout
+        </Button>
+      </ButtonGroup>
+    </Box>
+  );
+};
 
 const PaymentResultPage = () => {
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const query = new URLSearchParams(window.location.search);
+  const { colorMode } = useColorMode();
+  const navigate = useNavigate();
+
+  function logout() {
+    localStorage.removeItem("user-token");
+    navigate("/");
+  }
+
+  useEffect(() => {
+    function getState() {
+      if (query.get("success")) setIsSuccess(true);
+      else if (query.get("canceled")) setIsSuccess(false);
+      else {
+        logout();
+      }
+    }
+    getState();
+
+    return getState();
+  }, []);
+
   return (
     <Center
       width={"100vw"}
-      height={{ lg: "100vh", base: "175vh" }}
-      backgroundColor={"whitesmoke"}
+      height={"100vh"}
+      backgroundColor={colorMode === "light" ? "whitesmoke" : "#323232"}
       position={"relative"}
       overflow={"scroll"}
     >
-      <Text color={"black"}>Hello</Text>
+      {isSuccess ? (
+        <SuccessMessage navigate={navigate} logout={logout} />
+      ) : (
+        <CanceledMessage navigate={navigate} logout={logout} />
+      )}
     </Center>
   );
 };
