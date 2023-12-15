@@ -27,7 +27,7 @@ router.post(
   async (req: Request<{}, {}, { items: CheckoutItem[] }>, res: Response) => {
     if (!req.body.items) return res.status(400).send("Invalid call.");
     try {
-      const checkoutItems = req.body.items.map((item) => {
+      const checkoutItems = req.body.items.map((item: CheckoutItem) => {
         return {
           price_data: {
             currency: "gbp",
