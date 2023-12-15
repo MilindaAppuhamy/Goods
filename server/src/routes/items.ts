@@ -1,11 +1,11 @@
-import { Request, Response, Express } from "express";
+import { Request, Response, Router } from "express";
 import { ValidationResult } from "joi";
 import { Item, ItemType, validateItem } from "../models/item";
 import { User } from "../models/user";
 import "../models/index";
 
-const express = require("express");
-const router: Express = express.Router();
+import express from "express";
+const router: Router = express.Router();
 router.use(express.json());
 
 //middleware

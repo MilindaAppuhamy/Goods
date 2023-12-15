@@ -1,4 +1,4 @@
-import { Request, Response, Express } from "express";
+import { Request, Response, Router } from "express";
 import { ValidationResult } from "joi";
 import {
   validateUser,
@@ -11,9 +11,9 @@ import { passwordCheck } from "../utils/passwordCheck";
 import { Item } from "../models/item";
 import { CartItem } from "../models/cartItem";
 
-const express = require("express");
+import express from "express";
+const router: Router = express.Router();
 const bcrypt = require("bcrypt");
-const router: Express = express.Router();
 router.use(express.json());
 
 //middleware

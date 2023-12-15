@@ -7,7 +7,7 @@ import { cartRouter } from "./routes/carts";
 import { paymentRouter } from "./routes/payment";
 
 //imports
-const express = require("express");
+import express from "express";
 const cors = require("cors");
 const db: Sequelize = require("./db");
 require("dotenv").config();

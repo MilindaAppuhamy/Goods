@@ -1,12 +1,12 @@
-import { Request, Response, Express } from "express";
+import { Request, Response, Router } from "express";
 import { User } from "../models/user";
 import { CartItem, CartItemType } from "../models/cartItem";
 import { Item } from "../models/item";
 
 const sendOrderConfirmationEmail = require("../utils/sendOrderConfirmationEmail");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
-const express = require("express");
-const router: Express = express.Router();
+import express from "express";
+const router: Router = express.Router();
 require("dotenv").config();
 router.use(express.json());
 
