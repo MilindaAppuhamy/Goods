@@ -1,7 +1,7 @@
 import { Box, Heading, Skeleton, useColorMode } from "@chakra-ui/react";
 import AddMyStoreItem from "../components/AddMyStoreItem";
 import { ItemType } from "../components/ItemCard";
-import MyStoreItem from "../components/myStoreItem";
+import MyStoreItem from "../components/MyStoreItem";
 import useGetUser from "../hooks/useGetUser";
 import useGetUserItems from "../hooks/useGetUserItems";
 import getUserHeaders from "../utils/getUserHeaders";
