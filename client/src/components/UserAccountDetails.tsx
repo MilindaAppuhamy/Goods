@@ -32,7 +32,9 @@ const UserAccountDetails = () => {
             fontSize={"14px"}
             color={colorMode === "light" ? "grey" : "white"}
           >
-            {user?.data.email}
+            {user?.data.email.length > 22
+              ? `${user?.data.email.substring(0, 22)}...`
+              : user?.data.email}
           </Text>
         </Skeleton>
         <Skeleton isLoaded={!isLoading}>
@@ -41,7 +43,9 @@ const UserAccountDetails = () => {
             fontSize={"18px"}
             color={colorMode === "light" ? "black" : "white"}
           >
-            {user?.data.username}
+            {user?.data.username.length > 16
+              ? `${user?.data.username.substring(0, 16)}...`
+              : user?.data.username}
           </Text>
         </Skeleton>
       </Box>

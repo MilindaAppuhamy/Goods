@@ -303,6 +303,7 @@ const NavLinks = () => {
         }}
         onClick={() => {
           localStorage.removeItem("user-token");
+          localStorage.removeItem("userId");
           navigate("/");
         }}
       >

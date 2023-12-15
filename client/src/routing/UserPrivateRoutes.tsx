@@ -11,6 +11,7 @@ const UserPrivateRoutes = () => {
 
     if (parsedData.expiration && parsedData.expiration < currentTime) {
       localStorage.removeItem("user-token");
+      localStorage.removeItem("userId");
     }
   }
   return <MainLayoutPage />;

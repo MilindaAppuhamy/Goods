@@ -1,5 +1,4 @@
 import "./index.css";
-import React from "react";
 import ReactDOM from "react-dom/client";
 import router from "./router";
 import { RouterProvider } from "react-router-dom";
@@ -12,13 +11,13 @@ import theme from "./theme";
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <React.StrictMode>
-    <ChakraProvider>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-        <ReactQueryDevtools />
-      </QueryClientProvider>
-    </ChakraProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <ChakraProvider>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <ReactQueryDevtools />
+    </QueryClientProvider>
+  </ChakraProvider>
+  // </React.StrictMode>
 );
