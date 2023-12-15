@@ -21,6 +21,7 @@
     "joi": "^17.11.0",
     "joi-password-complexity": "^5.2.0",
     "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.4",
     "sequelize": "^6.35.1",
     "sqlite3": "^5.1.6",
     "stripe": "^14.7.0",

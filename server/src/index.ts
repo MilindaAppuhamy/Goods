@@ -28,7 +28,7 @@ app.use(
 app.use("/api/users", userRouter);
 app.use("/api/items", itemRouter);
 app.use("/api/carts", cartRouter);
-app.use("/create-checkout-session", paymentRouter);
+app.use("/api/checkout", paymentRouter);
 
 //generic GET request
 app.get("/", (req: Request, res: Response) => {
@@ -39,7 +39,7 @@ app.get("/", (req: Request, res: Response) => {
 app.listen(PORT, async () => {
   try {
     await db.sync();
-    console.log(`listening on http://localhost:${PORT}`);
+    console.log(`backend service listening on ${PORT}`);
   } catch (error) {
     console.error("Unable to connect to the database:", error);
   }
