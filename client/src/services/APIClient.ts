@@ -81,6 +81,20 @@ class APIClient<T> {
     });
     return response;
   };
+
+  getCheckoutComplete = async (
+    userId: number | string,
+    sessionId: number | string,
+    headers?: object
+  ) => {
+    const axiosInstance = axios.create({
+      headers: headers,
+    });
+    const response = await axiosInstance.get(
+      this.baseUrl + this.endpoint + "/" + sessionId + "/" + userId
+    );
+    return response;
+  };
 }
 
 export default APIClient;
