@@ -9,6 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import useGetCheckoutComplete from "../hooks/useGetPaymentResult";
+import getUserHeaders from "../utils/getUserHeaders";
 
 const SuccessMessage = ({
   navigate,
@@ -106,22 +108,38 @@ const PaymentResultPage = () => {
   const { colorMode } = useColorMode();
   const navigate = useNavigate();
 
+  async function completeCheckoutSession() {
+    const headers = getUserHeaders();
+    const userId = localStorage.getItem("userId");
+
+    //retrieve the stripe session Id from session storage
+    const sessionId =
+      JSON.parse(sessionStorage.getItem("checkout_session")!)?.sessionId ||
+      null;
+    //if not available redirects to the explore page
+    if (!sessionId) return navigate("/goods/explore");
+
+    //perform the checkout
+    await useGetCheckoutComplete(userId!, sessionId, headers!);
+  }
+
   function logout() {
     localStorage.removeItem("user-token");
+    localStorage.removeItem("userId");
     navigate("/");
   }
 
   useEffect(() => {
     function getState() {
-      if (query.get("success")) setIsSuccess(true);
-      else if (query.get("canceled")) setIsSuccess(false);
+      if (query.get("success")) {
+        setIsSuccess(true);
+        completeCheckoutSession();
+      } else if (query.get("canceled")) setIsSuccess(false);
       else {
         logout();
       }
     }
     getState();
-
-    return getState();
   }, []);
 
   return (
